@@ -1,8 +1,15 @@
 language: node_js
+notifications:
+  email: maykonluiscapellari@gmail.com
 node_js:
   - 5.2.0
-notifications:
-  - maykonluiscapellari@gmail.com
+services:
+  - mongodb
+env:
+  global:
+    - NODE_ENV: test
+addons:
+  sauce_connect: true
 before_install:
   - npm install -g bower
   - npm install -g grunt-cli
@@ -11,7 +18,10 @@ before_install:
   - webdriver-manager update
   - bower install
 before_script:
+  - node test/data.js
   - grunt
   - cd dist
 script:
   - karma start config/karma.config.js --single-run --browsers PhantomJS
+  - node server &
+  - protractor config/protractor.js
