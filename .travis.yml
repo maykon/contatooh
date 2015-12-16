@@ -2,31 +2,38 @@ language: node_js
 notifications:
   email: maykonluiscapellari@gmail.com
 node_js:
-  - 5.2.0
+- 5.2.0
 services:
-  - mongodb
+- mongodb
 env:
   global:
-    - NODE_ENV: test
+  - NODE_ENV: test
 addons:
   sauce_connect: true
 before_install:
-  - npm install -g bower
-  - npm install -g grunt-cli
-  - npm install -g karma-cli
-  - npm install -g protractor
-  - webdriver-manager update
-  - bower install
+- npm install -g bower
+- npm install -g grunt-cli
+- npm install -g karma-cli
+- npm install -g protractor
+- webdriver-manager update
+- bower install
 before_script:
-  - node test/data.js
-  - grunt minifica
+- node test/data.js
+- grunt minifica
 script:
-  - karma start config/karma.config.js --single-run --browsers PhantomJS
-  - node server &
-  - protractor config/protractor.js
+- karma start config/karma.config.js --single-run --browsers PhantomJS
 before_deploy:
-  - git config --global user.email 'maykonluiscapellari@gmail.com'
-  - git config --global user.name 'Maykon Luís Capellari'
-  - git checkout $TRAVIS_BRANCH
-  - git add --all
-  - git commit -am "Travis commit"
+- git config --global user.email 'maykonluiscapellari@gmail.com'
+- git config --global user.name 'Maykon Luís Capellari'
+- git checkout $TRAVIS_BRANCH
+- git add --all
+- git commit -am "Travis commit"
+deploy:
+  provider: openshift
+  user: maykonluiscapellari@gmail.com
+  password:
+    secure: BZsMajwR+7z4vMDyVvm9WjtbTlprLRnh4UYbNlSaZxNAOs1tOYA3BN98beOTwpGAfJgnIimlq0yFX0kz65L9eFbVsoEJP8N3orekpfhsh4TN7nZ/J8xtJGWdRmNd8sx95ZqoxgecnG1CzzqJpXWuIVUqzIIPuRxMadCqPQGIk8QfqraT2qFUq1ExgbLq5R1720lltxM5arpVpZJUFH+0fK8+to57nNCcu2WRoGy5cx5q5CZCw+zEVvOhg+2o41uvlWZGqxG3OkGkA3ehGx0k9kgkZLMmGjWFYf47uThko1XhBOVZXrrkHU08utBWbLW65MzyN4mdTGUk4VTu233MJM4KZFmi9nsoM9VlI139TT3wVBDigvQy3zKG/sCqC98SKk6nHKFoF6z/vHCNeLX3ltl5KraAP3aGnvrgYM7D9FXmriDy87VT2CRPmFmnAbwb87He4kXtldcsHiuoTI8+o3tTttOQ7BJ1oJGE7j9/YjulzEP1EbNsE9TaL9w12VOUihDybwhJ5FPHDu2BbAB0DBFAO5BjpwfVRP2+IxVl/ZH+x1zXgMHbgIGqMpKR8B2eXg7UEa3iat0U5ds9CY8qEl6Cc9rEEafZtV445Xf3vjog1dUQ40VsD60e1MgE1LzO8GDkeXsSgbgdxtOqPiuS90ryVS2EJMQGj2gmwD+XgAI=
+  app: contatooh
+  domain: capellari
+  on:
+    repo: maykon/contatooh
