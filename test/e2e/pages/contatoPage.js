@@ -15,8 +15,8 @@ var contatoPage = function() {
     return element(by.binding('mensagem.texto')).getText();
   };
   this.selecionarPrimeiraEmergenciaDaLista = function() {
-    var emergencia = element.all(by.css('option')).get(1);
-    if (emergencia) emergencia.click();
+    var emergencia = element.all(by.css('option'));
+    if (emergencia) emergencia.get(1).click();
   };
 }
 module.exports = contatoPage;
