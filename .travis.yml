@@ -10,15 +10,6 @@ env:
     - NODE_ENV: test
 addons:
   sauce_connect: true
-deploy:
-  provider: openshift
-  user: maykonluiscapellari@gmail.com
-  password:
-    secure: C@p3ll@r1
-  app: contatooh
-  domain: 'capellari.rhcloud.com'
-on:
-  repo: maykon/contatooh
 before_install:
   - npm install -g bower
   - npm install -g grunt-cli
@@ -34,8 +25,8 @@ script:
   - node server &
   - protractor config/protractor.js
 before_deploy:
-  - git config --global user.email 'maykonluiscapellari@gmail'
-  - git config --global user.name 'Maykon Luis Capellari'
+  - git config --global user.email 'maykonluiscapellari@gmail.com'
+  - git config --global user.name 'Maykon Luís Capellari'
   - git checkout $TRAVIS_BRANCH
   - git add --all
-  -git commit -am "Travis commit"
+  - git commit -am "Travis commit"
