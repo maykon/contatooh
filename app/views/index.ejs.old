@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bem-vindo</title>
+</head>
+<body>
+  <%= nome %>:
+  <h1>Bem-vindo ao <%= nome %></h1>
+</body>
+</html>
