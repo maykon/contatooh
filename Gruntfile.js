@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      options:{
+      options: {
         force: true
       },
       dist: {
@@ -19,19 +19,19 @@ module.exports = function(grunt) {
       }
     },
     usemin: {
-      html: 'dist/app/views/**/*.ejs'
+      html: 'app/views/**/*.ejs'
     },
     useminPrepare: {
       options: {
-        root: 'dist/public',
-        dest: 'dist/public'
+        root: 'public',
+        dest: 'public'
       },
-      html: 'dist/app/views/**/*.ejs'
+      html: 'app/views/**/*.ejs'
     },
     ngAnnotate: {
       scripts: {
         expand: true,
-        src: ['dist/public/js/**/*.js']
+        src: ['public/js/**/*.js']
       }
     }
   });
