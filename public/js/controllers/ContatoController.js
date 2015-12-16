@@ -1,10 +1,12 @@
 angular.module('contatooh').controller('ContatoController',
   function($scope, $routeParams, Contato) {
 
-    function buscaContatos(contatoId){
+    function buscaContatos(contatoId) {
       $scope.contato = {};
-      if(contatoId){
-        var promise = Contato.get({id: contatoId}).$promise;
+      if (contatoId) {
+        var promise = Contato.get({
+          id: contatoId
+        }).$promise;
         promise
           .then(function(contato) {
             $scope.contato = contato;
@@ -16,7 +18,7 @@ angular.module('contatooh').controller('ContatoController',
               texto: 'Não foi possível obter a lista'
             };
           });
-      }else{
+      } else {
         $scope.contato = new Contato();
       }
     }
@@ -24,15 +26,20 @@ angular.module('contatooh').controller('ContatoController',
     $scope.salva = function() {
       $scope.contato.$save()
         .then(function() {
-          $scope.mensagem = {texto: 'Salvo com sucesso'};
+          $scope.mensagem = {
+            texto: 'Salvo com sucesso'
+          };
           $scope.contato = new Contato();
+          $scope.$broadcast('contatoSalvo');
         })
         .catch(function(erro) {
-          $scope.mensagem = {texto: 'Não foi possível salvar'};
+          $scope.mensagem = {
+            texto: 'Não foi possível salvar'
+          };
         });
     };
 
-    $scope.init = function(){
+    $scope.init = function() {
       buscaContatos($routeParams.contatoId);
     };
     $scope.init();
